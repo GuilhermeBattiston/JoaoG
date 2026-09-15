@@ -9,7 +9,10 @@
 </head>
 <body>
     <form method="POST">
-        <input type="text" id="nome" name="nome">
+        <input type="text" id="nome" name="nome" placeholder="Digite seu nome">
+        <input type="number" id="idade" name="idade" placeholder="Digite sua idade">
+
+        <button type="submit">Enviar</button>
         <?php
             $nome = "";
             $idade = 0;
