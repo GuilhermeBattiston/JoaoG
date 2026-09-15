@@ -8,14 +8,18 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
+    <form action="">
+        <input type="text" name="$nome" placeholder="Digite seu nome: ">
+        <input type= "number" id="$idade" placeholder="Digite sua idade: >
+    </form>
+
     <?php
-    $nome = "João";
-    $idade = "20";
+    $idade = "";
     $verificar = "";
     if  ($idade >=18){
         $verificar = "Você é maior de idade";
     }
-    else {
+    elseif ($idade >=0) {
         $verificar - "Você é menor de idade";
     }
     ?>
