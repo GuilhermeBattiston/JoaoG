@@ -8,12 +8,13 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <form action="">
+    <form method="post">
         <input type="text" name="$nome" placeholder="Digite seu nome: ">
         <input type= "number" id="$idade" placeholder="Digite sua idade: ">
     </form>
 
     <?php
+    $nome = "";
     $idade = "";
     $verificar = "";
     if  ($idade >=18){
