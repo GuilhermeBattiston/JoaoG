@@ -40,8 +40,8 @@
 
         <?php } ?>
     <div class="card">
-        <h1>nome: <?=$nome?></h1>
-        <p>idade: <?=$idade?></p>
+        <h1>Nome: <?=$nome?></h1>
+        <p>Idade: <?=$idade?></p>
         <p> <?=$verificar?></p>
     </div>
 </body>
