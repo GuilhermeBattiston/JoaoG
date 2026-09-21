@@ -40,22 +40,23 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 </head>
 
 <body>
+    <div class="card1">
+        <form method="POST">
+            <input type="text" name="nome" placeholder="Digite seu nome">
+            <input type="number" name="idade" placeholder="Digite sua idade"><br><br>
+            <input type="number" name="nota1" placeholder="Digite a primeira nota"><br><br>
+            <input type="number" name="nota2" placeholder="Digite a segunda nota"><br><br>
+            <input type="number" name="nota3" placeholder="Digite a terceira nota"><br><br>
+            <input type="number" name="nota4" placeholder="Digite a quarta nota"><br><br>
+            <input type="number" name="nota5" placeholder="Digite a quintaa nota"><br><br>
 
-    <form method="POST">
-        <input type="text" name="nome" placeholder="Digite seu nome">
-        <input type="number" name="idade" placeholder="Digite sua idade"><br><br>
-        <input type="number" name="nota1" placeholder="Digite a primeira nota"><br><br>
-        <input type="number" name="nota2" placeholder="Digite a segunda nota"><br><br>
-        <input type="number" name="nota3" placeholder="Digite a terceira nota"><br><br>
-        <input type="number" name="nota4" placeholder="Digite a quarta nota"><br><br>
-        <input type="number" name="nota5" placeholder="Digite a quintaa nota"><br><br>
-
-        <button type="submit">Enviar</button>
-    </form>
+            <button type="submit">Enviar</button>
+        </form>
+    </div>
 
     <?php if ($resultado != "") { ?>
 
-        <div class="card">
+        <div class="card2">
             <h2>Nome: <?= $nome ?></h2>
             <p>Idade: <?= $idade ?></p>
             <p>Média: <?= $media ?></p>
