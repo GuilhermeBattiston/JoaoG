@@ -24,7 +24,7 @@
                     $resultado = "Você é maior de idade";
                 }
                 else  {
-                    $resultado - "Você é menor de idade";
+                    $resultado = "Você é menor de idade";
                 }
             }
             //a
