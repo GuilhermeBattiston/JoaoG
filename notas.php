@@ -21,10 +21,10 @@
                 $nome =$_POST["nome"];
                 $idade =$_POST["idade"];
                 if  ($idade >=18){
-                    $verificar = "Você é maior de idade";
+                    $resultado = "Você é maior de idade";
                 }
                 else  {
-                    $verificar = "Você é menor de idade";
+                    $resultado = "Você é menor de idade";
                 }
             }
             //a
@@ -39,10 +39,5 @@
         </div>
 
         <?php } ?>
-    <div class="card">
-        <h1>Nome: <?=$nome?></h1>
-        <p>Idade: <?=$idade?></p>
-        <p> <?=$resultado?></p>
-    </div>
 </body>
 </html>
