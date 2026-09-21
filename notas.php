@@ -14,6 +14,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $nota5 = $_POST["nota5"];
     $media = $_POST["média"];
 
+    $media = (($nota1*2) + ($nota2*3) + ($nota3*1) + ($nota4*1) + ($nota5*3));
+
     
 
     if ($media >= 7) {
@@ -37,12 +39,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     <form method="POST">
         <input type="text" name="nome" placeholder="Digite seu nome">
-        <input type="number" name="idade" placeholder="Digite sua idade">
-        <input type="number" name="Nota 1" placeholder="Digite a primeira nota">
-        <input type="number" name="Nota 2" placeholder="Digite a segunda nota">
-        <input type="number" name="Nota 3" placeholder="Digite a terceira nota">
-        <input type="number" name="Nota 4" placeholder="Digite a quarta nota">
-        <input type="number" name="Nota 5" placeholder="Digite a quintaa nota">
+        <input type="number" name="idade" placeholder="Digite sua idade"><br><br>
+        <input type="number" name="Nota 1" placeholder="Digite a primeira nota"><br><br>
+        <input type="number" name="Nota 2" placeholder="Digite a segunda nota"><br><br>
+        <input type="number" name="Nota 3" placeholder="Digite a terceira nota"><br><br>
+        <input type="number" name="Nota 4" placeholder="Digite a quarta nota"><br><br>
+        <input type="number" name="Nota 5" placeholder="Digite a quintaa nota"><br><br>
 
         <button type="submit">Enviar</button>
     </form>
