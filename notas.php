@@ -56,7 +56,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <?php if ($resultado != "") { ?>
 
         <div class="card">
-            <h1>Nome: <?= $nome ?></h1>
+            <h2>Nome: <?= $nome ?></h2>
             <p>Idade: <?= $idade ?></p>
             <p>Média: <?= $media ?></p>
             <p><?= $resultado ?></p>
