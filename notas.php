@@ -21,10 +21,10 @@
                 $nome =$_POST["nome"];
                 $idade =$_POST["idade"];
                 if  ($idade >=18){
-                    $resultado = "Você é maior de idade";
+                    $verificar = "Você é maior de idade";
                 }
                 else  {
-                    $resultado = "Você é menor de idade";
+                    $verificar = "Você é menor de idade";
                 }
             }
             //a
