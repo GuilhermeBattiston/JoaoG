@@ -5,7 +5,7 @@ $media = "";
 $resultado = "";
 
 if ($_SERVER["REQUEST_METHOD"] == "GET") {
-    $nome = $_GETT["nome"];
+    $nome = $_GET["nome"];
     $idade = $_GET["idade"];
     $nota1 = $_GET["nota1"];
     $nota2 = $_GET["nota2"];
