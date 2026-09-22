@@ -73,7 +73,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         </form>
     </div>
 
-    <?php if ($resultado != "") { ?>
+    <?php if ($resultado != "" && $validar) { ?>
 
         <?php if ($media >= 7) { ?>
 
