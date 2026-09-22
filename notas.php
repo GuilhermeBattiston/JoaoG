@@ -52,7 +52,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         }
     }
     else{
-        $resultado = "Digite notas de 0 a 10";
+        $resultado = "Digite notas de 0 a 10 e uma idade válida";
     }
 }
 ?>
@@ -69,7 +69,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 <body>
     <div class="card1">
         <form method="POST">
-            <input type="text" name="nome" placeholder="Digite seu nome">
+            <input type="text" name="nome" placeholder="Digite seu nome"><br><br>
             <input type="number" name="idade" placeholder="Digite sua idade"><br><br>
             <input type="number" name="nota1" placeholder="Digite a primeira nota"><br><br>
             <input type="number" name="nota2" placeholder="Digite a segunda nota"><br><br>

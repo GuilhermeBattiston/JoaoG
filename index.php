@@ -6,7 +6,7 @@
     <title>Document</title>
 </head>
 <body>
-    <a href="idade.php">Verificador de Idade</a>
+    <a href="idade.php">Verificador de Idade</a><br><br>
     <a href="notas.php">Verificador de Notas</a><br><br>
     <a href="notas-desafio.php">Desafio-Notas</a><br><br>
 </body>
