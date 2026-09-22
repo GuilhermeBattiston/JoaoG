@@ -73,29 +73,34 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         </form>
     </div>
 
-    <?php if ($resultado != "" && $validar) { ?>
+    <?php if ($resultado != "") { ?>
+        <?php if($validar) { ?>
+            <?php if ($media >= 7) { ?>
 
-        <?php if ($media >= 7) { ?>
+                <div class="card2">
+                    <h2>Nome: <?= $nome ?></h2>
+                    <p>Idade: <?= $idade ?></p>
+                    <p>Média: <?= $media ?></p>
+                    <p><?= $resultado ?></p>
+                </div>
 
+            <?php } else { ?>
+
+                <div class="card2">
+                    <h2>Nome: <?= $nome ?></h2>
+                    <p>Idade: <?= $idade ?></p>
+                    <p>Média: <?= $media ?></p>
+                <p><?= $resultado ?>. Faltaram <?= $necessario ?> pontos para a média 7</p>
+                </div>
+
+            <?php } ?>
+        <?php } else{ ?>
             <div class="card2">
-                <h2>Nome: <?= $nome ?></h2>
-                <p>Idade: <?= $idade ?></p>
-                <p>Média: <?= $media ?></p>
-                <p><?= $resultado ?></p>
+                <p><?= $resultado?></p>
             </div>
-
-        <?php } else { ?>
-
-            <div class="card2">
-                <h2>Nome: <?= $nome ?></h2>
-                <p>Idade: <?= $idade ?></p>
-                <p>Média: <?= $media ?></p>
-             <p><?= $resultado ?>. Faltaram <?= $necessario ?> pontos para a média 7</p>
-            </div>
-
         <?php } ?>
-
     <?php } ?>
+    
 
 </body>
 </html>
