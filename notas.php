@@ -17,32 +17,35 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
    
     $notas = [$nota1, $nota2, $nota3, $nota4, $nota5];
 
-    $valiadar=true;
-
-    $media = (($nota1*2) + ($nota2*3) + ($nota3*1) + ($nota4*1) + ($nota5*3))/10;
-    $necessario = (7-$media);
-
+    $validar=true;
     
     foreach ($notas as $nota){
         if($nota<0 || $nota>10){
             $validar=false;
             break;
         }
-    };
-        if ($nota[$i]>=0 && $nota[$i]<=10){
-            if ($media >= 7) {
-                $resultado = "Você está aprovado";
-            } 
-            elseif ($media >=5 && $media <7) {
-                $resultado = "Você está de recuperação";
-            }
-            else {
-                $resultado = "Você está de reprovado";
-            }
+    }
+
+
+    if ($validar){
+            $media = (($nota1*2) + ($nota2*3) + ($nota3*1) + ($nota4*1) + ($nota5*3))/10;
+        
+        
+        $necessario = (7-$media);
+        
+        if ($media >= 7) {
+            $resultado = "Você está aprovado";
+        } 
+        elseif ($media >=5 && $media <7) {
+            $resultado = "Você está de recuperação";
         }
-        else{
-            $resultado = "Insira uma nota válida";
+        else {
+            $resultado = "Você está reprovado";
         }
+    }
+    else{
+        $resultado = "Digite notas de 0 a 10";
+    }
 }
 ?>
 
@@ -64,7 +67,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             <input type="number" name="nota2" placeholder="Digite a segunda nota"><br><br>
             <input type="number" name="nota3" placeholder="Digite a terceira nota"><br><br>
             <input type="number" name="nota4" placeholder="Digite a quarta nota"><br><br>
-            <input type="number" name="nota5" placeholder="Digite a quintaa nota"><br><br>
+            <input type="number" name="nota5" placeholder="Digite a quinta nota"><br><br>
 
             <button type="submit">Enviar</button>
         </form>
@@ -87,7 +90,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 <h2>Nome: <?= $nome ?></h2>
                 <p>Idade: <?= $idade ?></p>
                 <p>Média: <?= $media ?></p>
-             <p><?= $resultado ?>. Faltaram <?= $necessario ?> pontos</p>
+             <p><?= $resultado ?>. Faltaram <?= $necessario ?> pontos para a média 7</p>
             </div>
 
         <?php } ?>
