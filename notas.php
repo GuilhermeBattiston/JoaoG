@@ -16,14 +16,19 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $nota5 = $_POST["nota5"];
    
     $notas = [$nota1, $nota2, $nota3, $nota4, $nota5];
+    
 
     $validar=true;
+    $validaridade=true;
     
     foreach ($notas as $nota){
         if($nota<0 || $nota>10){
             $validar=false;
             break;
         }
+    }
+    if($idade<0){
+        $validar=false;
     }
 
 
@@ -32,8 +37,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         
         
         $necessario = (7-$media);
-        
-        if ($media >= 7) {
+        if($media ==10){
+             $resultado = "Parabéns!! Aprovado com excelência";
+        }
+
+        elseif ($media >= 7 && $media < 10) {
             $resultado = "Você está aprovado";
         } 
         elseif ($media >=5 && $media <7) {
