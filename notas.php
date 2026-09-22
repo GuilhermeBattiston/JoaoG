@@ -2,7 +2,9 @@
 $nome = "";
 $idade = "";
 $media = "";
+$necessario = "";
 $resultado = "";
+
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $nome = $_POST["nome"];
@@ -15,18 +17,24 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
    
 
     $media = (($nota1*2) + ($nota2*3) + ($nota3*1) + ($nota4*1) + ($nota5*3))/10;
+    $necessario =(7-$media);
 
     
-
-    if ($media >= 7) {
-        $resultado = "Você está aprovado";
-    } 
-    elseif ($media >=5 && $media <7) {
-        $resultado = "Você está de recuperação";
-    }
-    else {
-        $resultado= "Você está de reprovado";
-    }
+    for ($i=0;$i<6;$i++);
+        if ($nota[$i]>=0 && $nota[$i]<=10){
+            if ($media >= 7) {
+                $resultado = "Você está aprovado";
+            } 
+            elseif ($media >=5 && $media <7) {
+                $resultado = "Você está de recuperação";
+            }
+            else {
+                $resultado = "Você está de reprovado";
+            }
+        }
+        else{
+            $resultado = "Insira uma nota válida";
+        }
 }
 ?>
 
@@ -56,12 +64,25 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     <?php if ($resultado != "") { ?>
 
-        <div class="card2">
-            <h2>Nome: <?= $nome ?></h2>
-            <p>Idade: <?= $idade ?></p>
-            <p>Média: <?= $media ?></p>
-            <p><?= $resultado ?></p>
-        </div>
+        <?php if ($media >= 7) { ?>
+
+            <div class="card2">
+                <h2>Nome: <?= $nome ?></h2>
+                <p>Idade: <?= $idade ?></p>
+                <p>Média: <?= $media ?></p>
+                <p><?= $resultado ?></p>
+            </div>
+
+        <?php } else { ?>
+
+            <div class="card2">
+                <h2>Nome: <?= $nome ?></h2>
+                <p>Idade: <?= $idade ?></p>
+                <p>Média: <?= $media ?></p>
+             <p><?= $resultado ?>. Faltaram <?= $necessario ?> pontos</p>
+            </div>
+
+        <?php } ?>
 
     <?php } ?>
 
