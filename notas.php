@@ -15,12 +15,20 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $nota4 = $_POST["nota4"];
     $nota5 = $_POST["nota5"];
    
+    $notas = [$nota1, $nota2, $nota3, $nota4, $nota5];
+
+    $valiadar=true;
 
     $media = (($nota1*2) + ($nota2*3) + ($nota3*1) + ($nota4*1) + ($nota5*3))/10;
-    $necessario =(7-$media);
+    $necessario = (7-$media);
 
     
-    for ($i=0;$i<6;$i++);
+    foreach ($notas as $nota){
+        if($nota<0 || $nota>10){
+            $validar=false;
+            break;
+        }
+    };
         if ($nota[$i]>=0 && $nota[$i]<=10){
             if ($media >= 7) {
                 $resultado = "Você está aprovado";
