@@ -1,6 +1,6 @@
 <?php
 $nome = "João";
-$senha = "1234";
+$senha = 1234;
 $resultado = "";
 $senha_input = "";
 $nome_input = "";
