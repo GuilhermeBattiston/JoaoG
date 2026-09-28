@@ -1,0 +1,46 @@
+<?php
+$nome = "João";
+$senha = 1234;
+$resultado = "";
+
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    $nome = $_POST["nome"];
+    $senha = $_POST["senha"];
+
+    if ($senha == $senha && $nome == $nome) {
+        $resultado = "Seja bem vindo ";
+    } else {
+        $resultado = "Usuário ou senha incorretos";
+    }
+}
+?>
+
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JoaoG</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <form method="POST">
+        <input type="text" name="nome" placeholder="Digite seu usuário">
+
+        <input type="number" name="idade" placeholder="Digite sua senha">
+
+        <button type="submit">Enviar</button>
+    </form>
+
+    <?php if ($resultado != "") { ?>
+
+        <div class="card">
+            <h1>Seja bem vindo: <?= $resultado ?></h1>
+        </div>
+
+    <?php } ?>
+
+</body>
+</html>
