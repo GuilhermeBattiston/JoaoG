@@ -8,7 +8,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $senha = $_POST["senha"];
 
     if ($senha == $senha && $nome == $nome) {
-        $resultado = "Seja bem vindo ";
+        $resultado = "Seja bem vindo, João";
     } else {
         $resultado = "Usuário ou senha incorretos";
     }
@@ -35,9 +35,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     </form>
 
     <?php if ($resultado != "") { ?>
-
         <div class="card">
-            <h1>Seja bem vindo: <?= $resultado ?></h1>
+            <h1><?= $resultado ?></h1>
         </div>
 
     <?php } ?>
