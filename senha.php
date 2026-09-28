@@ -47,3 +47,4 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
 </body>
 </html>
+    <!-- Com o GET o usuário e senha ficaram aparecendo no url -->
