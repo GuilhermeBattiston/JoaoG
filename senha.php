@@ -7,8 +7,7 @@ $nome_input = "";
 
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $nome = $_POST["nome"];
-    $senha = $_POST["senha"];
+
     $senha_input = $_POST["senha_input"];
     $nome_input = $_POST["nome_input"];
 
@@ -32,11 +31,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 <body>
 
     <form method="POST">
-        <input type="text" name="nome_input" placeholder="Digite seu usuário">
+        <input type="text" id="usuario" name="nome_input" placeholder="Digite seu usuário">
 
-        <input type="number" name="senha_input" placeholder="Digite sua senha">
+        <input type="number" id="senha" name="senha_input" placeholder="Digite sua senha">
 
-        <button type="submit">Enviar</button>
+        <button type="submit">Entrar</button>
     </form>
 
     <?php if ($resultado != "") { ?>
