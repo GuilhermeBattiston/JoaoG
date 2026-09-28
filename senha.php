@@ -7,7 +7,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $nome = $_POST["nome"];
     $senha = $_POST["senha"];
 
-    if ($senha == $senha && $nome == $nome) {
+    if ($senha == $senha || $nome == $nome) {
         $resultado = "Seja bem vindo, João";
     } else {
         $resultado = "Usuário ou senha incorretos";
@@ -29,7 +29,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <form method="POST">
         <input type="text" name="nome" placeholder="Digite seu usuário">
 
-        <input type="number" name="idade" placeholder="Digite sua senha">
+        <input type="number" name="senha" placeholder="Digite sua senha">
 
         <button type="submit">Enviar</button>
     </form>
