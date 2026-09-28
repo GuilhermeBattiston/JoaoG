@@ -32,6 +32,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         <input type="number" name="idade" placeholder="Digite sua idade">
 
         <button type="submit">Enviar</button>
+        <a href="index.php">Voltar ao início</a><br><br>
     </form>
 
     <?php if ($resultado != "") { ?>

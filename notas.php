@@ -78,6 +78,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             <input type="number" name="nota5" placeholder="Digite a quinta nota"><br><br>
 
             <button type="submit">Enviar</button>
+            <a href="index.php">Voltar ao início</a><br><br>
         </form>
     </div>
 
