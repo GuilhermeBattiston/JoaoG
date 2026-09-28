@@ -1,6 +1,6 @@
 <?php
 $nome = "João";
-$senha = 1234;
+$senha = "1234";
 $resultado = "";
 $senha_input = "";
 $nome_input = "";
@@ -12,7 +12,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $senha_input = $_POST["senha_input"];
     $nome_input = $_POST["nome_input"];
 
-    if ($senha_input == $senha || $nome_input == $nome) {
+    if ($senha_input == $senha && $nome_input == $nome) {
         $resultado = "Seja bem vindo, João";
     } else {
         $resultado = "Usuário ou senha incorretos";
