@@ -16,16 +16,16 @@ $pdo->exec($sql);
 
 $mensagem = "";
 
-if ($_SERVER["REQUEST_METHOD"] = "POST") {
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     $nome = $_POST["nome"];
     $genero = $_POST["genero"];
-    $nota = $_POST["notas"];
+    $nota = $_POST["nota"];
 
     $cadastrar = "INSERT INTO jogos (nome, genero, nota)
     VALUES ('$nome', '$genero', '$nota')";
 
-    $pdo->exec($cadastro);
+    $pdo->exec($cadastrar);
 
     $mensagem = "Jogo cadastrado com sucesso!";
 }
