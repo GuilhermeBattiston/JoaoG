@@ -4,8 +4,8 @@
     echo "Sistema conectado";
 
     $sql = "CREATE TABLE IF NOT EXISTS teste (
-        id INT AUTO_INCREMENT PRIMARY KEY
-        nome VARCHAR(100) 
+        id INT AUTO_INCREMENT PRIMARY KEY,
+        nome VARCHAR(100),
         idade INT
     )";
 
