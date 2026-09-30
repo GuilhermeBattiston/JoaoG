@@ -12,7 +12,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $nome_input = $_POST["nome_input"];
 
     if ($senha_input == $senha && $nome_input == $nome) {
-        $resultado = "Seja bem vindo, João";
+        $resultado = '<a href="jogos.php"></a>';
+        
     } else {
         $resultado = "Usuário ou senha incorretos";
     }

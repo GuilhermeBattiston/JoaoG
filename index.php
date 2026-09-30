@@ -26,7 +26,6 @@
     <a href="notas.php">Verificador de Notas</a><br><br>
     <a href="notas-desafio.php">Desafio-Notas</a><br><br>
     <a href="senha.php">Login</a><br><br>
-    <a href="jogos.php">Jogos(MySql)</a>
     
 </body>
 </html>
