@@ -30,6 +30,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $mensagem = "Jogo cadastrado com sucesso!";
 }
 
+$buscar = "SELECT * FROM jogos";
+
+$stmt = $pdo->query($buscar);
+
+$jogos = $stmt->fetchAll(PDO::FETCH_ASSOC)
+
 ?>
 
 <!DOCTYPE html>
@@ -60,6 +66,24 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <button type="submit">Cadastrar</button>
 
 </form>
+
+<h2>Jogos cadastrados</h2>
+<table>
+    <tr>
+        <th>ID</th>
+        <th>Nome</th>
+        <th>Gênero</th>
+        <th>Nota</th>
+    </tr>
+    <?php foreach($jogos as $jogo) { ?>
+        <tr>
+            <td><?= $jogo["id"]?></td>
+            <td><?= $jogo["nome"]?></td>            
+            <td><?= $jogo["genero"]?></td> 
+            <td><?= $jogo["nota"]?></td>       
+        </tr>
+    <?php } ?>
+</table>
 
 <?php
 
