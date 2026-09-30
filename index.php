@@ -11,7 +11,7 @@
 
     $pdo->exec($sql);
 
-    echo "Tabela criada com sucesso";
+    echo "\nTabela criada com sucesso\n";
 
 ?>
 <!DOCTYPE html>
