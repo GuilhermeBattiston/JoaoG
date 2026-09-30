@@ -11,7 +11,7 @@
 
     $pdo->exec($sql);
 
-    echo "\nTabela criada com sucesso\n";
+    echo "Tabela criada com sucesso";
 
 ?>
 <!DOCTYPE html>
@@ -26,6 +26,7 @@
     <a href="notas.php">Verificador de Notas</a><br><br>
     <a href="notas-desafio.php">Desafio-Notas</a><br><br>
     <a href="senha.php">Login</a><br><br>
+    <a href="jogos.php">Jogos(MySql)</a>
     
 </body>
 </html>

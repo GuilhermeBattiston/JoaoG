@@ -1,45 +1,79 @@
-
 <?php
+
+session_start();
 
 require "conexao.php";
 
-$sql = "
-CREATE TABLE IF NOT EXISTS jogos (
-    id INT PRIMARY KEY AUTO_INCREMENT,
-    nome VARCHAR(100),
-    genero VARCHAR(50),
-    nota INT
-)
-";
+if (!isset($_SESSION["logado"])) {
 
-$pdo->exec($sql);
+    if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["login"])) {
 
-$mensagem = "";
+        $usuario = $_POST["usuario"];
+        $senha = $_POST["senha"];
 
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
+        if ($usuario == "admin" && $senha == "1234") {
 
-    $nome = $_POST["nome"];
-    $genero = $_POST["genero"];
-    $nota = $_POST["nota"];
+            $_SESSION["logado"] = true;
 
-    $cadastrar = "INSERT INTO jogos (nome, genero, nota)
-    VALUES ('$nome', '$genero', '$nota')";
+        } else {
 
-    $pdo->exec($cadastrar);
+            $mensagem = "Usuário ou senha incorretos!";
 
-    $mensagem = "Jogo cadastrado com sucesso!";
+        }
+    }
 }
 
-$buscar = "SELECT * FROM jogos";
+if (isset($_POST["sair"])) {
 
-$stmt = $pdo->query($buscar);
+    session_destroy();
 
-$jogos = $stmt->fetchAll(PDO::FETCH_ASSOC)
+    header("Location: jogos.php");
+    exit;
+
+}
+
+if (isset($_SESSION["logado"])) {
+
+    $sql = "
+    CREATE TABLE IF NOT EXISTS jogos (
+        id INT PRIMARY KEY AUTO_INCREMENT,
+        nome VARCHAR(100),
+        genero VARCHAR(50),
+        nota INT
+    )
+    ";
+
+    $pdo->exec($sql);
+
+    $mensagem = "";
+
+    if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["cadastrar"])) {
+
+        $nome = $_POST["nome"];
+        $genero = $_POST["genero"];
+        $nota = $_POST["nota"];
+
+        $cadastrar = $pdo->prepare("
+            INSERT INTO jogos (nome, genero, nota)
+            VALUES (?, ?, ?)
+        ");
+
+        $cadastrar->execute([$nome, $genero, $nota]);
+
+        $mensagem = "Jogo cadastrado com sucesso!";
+    }
+    $buscar = "SELECT * FROM jogos";
+
+    $stmt = $pdo->query($buscar);
+
+    $jogos = $stmt->fetchAll(PDO::FETCH_ASSOC);
+}
 
 ?>
 
 <!DOCTYPE html>
 <html lang="pt-br">
+
 <head>
     <meta charset="UTF-8">
     <title>Jogos</title>
@@ -47,51 +81,68 @@ $jogos = $stmt->fetchAll(PDO::FETCH_ASSOC)
 
 <body>
 
-<h1>Cadastro de jogos</h1>
+<?php if (!isset($_SESSION["logado"])) { ?>
 
-<form method="POST">
+    <h1>Login</h1>
 
-    Nome do jogo:
-    <input type="text" name="nome">
-    <br><br>
+    <form method="POST">
 
-    Gênero:
-    <input type="text" name="genero">
-    <br><br>
+        Usuário: <input type="text" name="usuario"><br><br>
 
-    Nota:
-    <input type="number" name="nota">
-    <br><br>
+        Senha: <input type="password" name="senha"><br><br>
 
-    <button type="submit">Cadastrar</button>
+        <button type="submit" name="login">Entrar</button>
 
-</form>
+    </form>
+    <?php
 
-<h2>Jogos cadastrados</h2>
-<table>
+    if (isset($mensagem)) {
+        echo "<p>$mensagem</p>";
+    }
+    ?>
+<?php } else { ?>
+
+    <h1>Cadastro de jogos</h1>
+
+    <form method="POST">
+
+        Nome do jogo: <input type="text" name="nome"><br><br>
+        
+        Gênero: <input type="text" name="genero"><br><br>
+
+        Nota: <input type="number" name="nota"><br><br>
+
+        <button type="submit" name="cadastrar">Cadastrar</button>
+
+    </form>
+    <form method="POST">
+        <button type="submit" name="sair">Sair</button>
+    </form>
+<?php
+
+    if ($mensagem != "") {
+        echo "<p>$mensagem</p>";
+    }
+
+    ?>
+
+    <h2>Jogos cadastrados</h2>
     <tr>
         <th>ID</th>
         <th>Nome</th>
         <th>Gênero</th>
         <th>Nota</th>
     </tr>
+
     <?php foreach($jogos as $jogo) { ?>
         <tr>
-            <td><?= $jogo["id"]?></td>
-            <td><?= $jogo["nome"]?></td>            
-            <td><?= $jogo["genero"]?></td> 
-            <td><?= $jogo["nota"]?></td>       
+            <td><?= $jogo["id"] ?></td>
+            <td><?= $jogo["nome"] ?></td>
+            <td><?= $jogo["genero"] ?></td>
+            <td><?= $jogo["nota"] ?></td>
         </tr>
+
     <?php } ?>
-</table>
-
-<?php
-
-if ($mensagem != "") {
-    echo "<p>$mensagem</p>";
-}
-
-?>
-
+<?php } ?>
 </body>
 </html>

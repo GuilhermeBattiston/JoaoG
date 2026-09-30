@@ -1,6 +1,6 @@
 <?php
-$nome = "joao315";
-$senha = 170606;
+$nome = "João";
+$senha = 1234;
 $resultado = "";
 $senha_input = "";
 $nome_input = "";
@@ -12,7 +12,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $nome_input = $_POST["nome_input"];
 
     if ($senha_input == $senha && $nome_input == $nome) {
-        $resultado = '<a href="jogos.php"></a>';
+        $resultado = 'Seja bem vindo, João';
         
     } else {
         $resultado = "Usuário ou senha incorretos";
