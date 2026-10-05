@@ -181,6 +181,6 @@ if (isset($_SESSION["logado"])) {
     </table>
 
 <?php } ?>
-
+    <a href="../index.php"></a>
 </body>
 </html>
