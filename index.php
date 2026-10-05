@@ -108,7 +108,7 @@
                     <div class="projeto-numero">
                         01
                     </div>
-                    <h3>Verificação de Idade</h3>]
+                    <h3>Verificação de Idade</h3>
                     <p>
                         Sistema desenvolvido para praticar
                         formulário e manipulação de dados.
@@ -128,7 +128,7 @@
                     <div class="projeto-numero">
                         02
                     </div>
-                    <h3>Cadastro de Jogos</h3>]
+                    <h3>Cadastro de Jogos</h3>
                     <p>
                         Sistema desenvolvido para praticar
                         formulário e manipulação de dados integrado
@@ -151,7 +151,7 @@
                     <div class="projeto-numero">
                         03
                     </div>
-                    <h3>Verificação de Notas</h3>]
+                    <h3>Verificação de Notas</h3>
                     <p>
                         Sistema desenvolvido para praticar
                         formulário e manipulação de dados.
@@ -171,7 +171,7 @@
                     <div class="projeto-numero">
                         04
                     </div>
-                    <h3>Verificação de Login</h3>]
+                    <h3>Verificação de Login</h3>
                     <p>
                         Sistema desenvolvido para praticar
                         formulário e manipulação de dados e login.
