@@ -37,7 +37,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         <input type="number" id="senha" name="senha_input" placeholder="Digite sua senha">
 
         <button type="submit">Entrar</button>
-        <a href="index.php">Voltar ao início</a><br><br>
+        <a href="../index.php">Voltar ao início</a><br><br>
     </form>
 
     <?php if ($resultado != "") { ?>

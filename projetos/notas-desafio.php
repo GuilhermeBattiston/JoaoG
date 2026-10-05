@@ -49,7 +49,7 @@ if ($_SERVER["REQUEST_METHOD"] == "GET") {
             <input type="number" name="nota3" placeholder="Digite a terceira nota"><br><br>
             <input type="number" name="nota4" placeholder="Digite a quarta nota"><br><br>
             <input type="number" name="nota5" placeholder="Digite a quintaa nota"><br><br>
-            <a href="index.php">Voltar ao início</a><br><br>
+            <a href="../index.php">Voltar ao início</a><br><br>
 
             <button type="submit">Enviar</button>
         </form>
