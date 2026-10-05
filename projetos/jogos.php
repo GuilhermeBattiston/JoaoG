@@ -89,7 +89,7 @@ if (isset($_SESSION["logado"])) {
 <head>
     <meta charset="UTF-8">
     <title>Jogos</title>
-    <a href="../index.php"></a>
+    
 </body>
 </head>
 
@@ -115,6 +115,8 @@ if (isset($_SESSION["logado"])) {
             Entrar
         </button>
 
+        <a href="../index.php"></a>
+
     </form>
 
     <?php if ($mensagem != "") { ?>
@@ -126,6 +128,8 @@ if (isset($_SESSION["logado"])) {
     <h1>Cadastro de jogos</h1>
 
     <form method="POST">
+
+        <a href="../index.php"></a>
 
         Nome do jogo:
         <input type="text" name="nome">
