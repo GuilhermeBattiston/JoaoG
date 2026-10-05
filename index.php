@@ -187,6 +187,23 @@
                 </div>
             </div>
         </section>
+        <section id="contato" class="secao">
+            <h2 class="titulo-secao">Contato</h2>
+            <p class="subtitulo-secao">
+                Quer entrar em contato comigo?
+            </p>
+            <div  class="contato-container">
+                <div class="contato-item">
+                    <h3>Email:</h3>
+                    <p>joaoguilhermepradolopes@gmail.com</p>
+                </div>
+                <div class="contato-item">
+                    <h3>Github:</h3>
+                    <p>github.com/GuilhermeBattiston</p>
+                </div>
+            </div>
+
+        </section>
     </main>
 </body>
 </html>
