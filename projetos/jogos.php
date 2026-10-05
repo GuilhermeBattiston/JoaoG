@@ -89,6 +89,8 @@ if (isset($_SESSION["logado"])) {
 <head>
     <meta charset="UTF-8">
     <title>Jogos</title>
+    <a href="../index.php"></a>
+</body>
 </head>
 
 <body>
@@ -181,6 +183,5 @@ if (isset($_SESSION["logado"])) {
     </table>
 
 <?php } ?>
-    <a href="../index.php"></a>
-</body>
+    
 </html>
