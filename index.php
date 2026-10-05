@@ -24,7 +24,7 @@
 <body>
     <a href="/projetos/idade.php">Verificador de Idade</a><br><br>
     <a href="/projetos/notas.php">Verificador de Notas</a><br><br>
-    <a href="/projetosa/notas-desafio.php">Desafio-Notas</a><br><br>
+    <a href="/projetos/notas-desafio.php">Desafio-Notas</a><br><br>
     <a href="/projetos/senha.php">Login</a><br><br>
     <a href="/projetos/jogos.php">Jogos(MySql)</a>
     
