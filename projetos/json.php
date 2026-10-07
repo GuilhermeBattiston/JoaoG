@@ -7,7 +7,7 @@
 
     if($_SERVER["REQUEST_METHOD"]=="POST"){
             $novoAluno=[
-                "nome" => $_POST["name"],
+                "nome" => $_POST["nome"],
                 "idade" => $_POST["idade"],
                 "curso" => $_POST["curso"]
             ];
