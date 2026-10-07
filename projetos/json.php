@@ -5,17 +5,23 @@
 
     $alunos = json_decode($json, true);
 
-    $novoAluno=[
-    "nome" => "João",
-    "idade" => 23,
-    "curso" => "Desenvolvimento de sistemas"
-    ];
+    if($_SERVER["REQUEST_METHOD"]=="POST"){
+            $novoAluno=[
+                "nome" => $_POST["name"],
+                "idade" => $_POST["idade"],
+                "curso" => $_POST["curso"]
+            ];
+        
+        
+    
+        $alunos[] = $novoAluno;
 
-    $alunos[] = $novoAluno;
+        $jsonAtualizado = json_encode($alunos, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE);
 
-    $jsonAtualizado = json_encode($alunos, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE);
+        file_put_contents($caminho, $jsonAtualizado);
+    }
 
-    file_put_contents($caminho, $jsonAtualizado)
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -25,6 +31,21 @@
     <title>Document</title>
 </head>
 <body>
-    
+    <form method="post">
+        <label>Nome:</label>
+        <input type="text" name="nome">
+        <label>Idade:</label>
+        <input type="number" name="idade">
+        <label>Curso:</label>
+        <input type="text" name="curso">
+        <button type="submit">Cadastrar</button>
+    </form>
+
+    <h2>Alunos Cadastrados</h2>
+    <?php foreach($alunos as $aluno) { ?>
+        <h3><?= $aluno["nome"] ?></h3>
+        <p>Idade<?= $aluno["idade"] ?></p>
+        <p>Curso<?= $aluno["curso"] ?></p>
+    <?php } ?>
 </body>
 </html>
