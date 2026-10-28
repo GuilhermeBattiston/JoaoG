@@ -1,4 +1,5 @@
 <?php 
+session_start();
 
 abstract class Maquina {
     public $nome;
@@ -94,10 +95,61 @@ function escapar($texto){
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Controle de Máquinas</title>
+    <link rel="stylesheet" href="/css/poo2.css">
 </head>
 <body>
-    
+    <div class="container">
+        
+        <h1>Controle de Máquinas Industriais</h1>
+        <h2>Cadastrar Máquina</h2>
+
+        <form method="POST">
+
+            <label for="nome">Nome da Máquina</label>
+            <input type="text" id="nome" name="nome" required>
+
+            <br><br>
+
+            <label>Tipo de Máquina</label>
+            <select name="tipo" required>
+                <option value="esteira">Esteira</option>
+                <option value="prensa">Prensa</option>
+                <option value="roboSolda">Robo Soldagem</option>
+            </select>
+
+            <br><br>
+
+            <label>Quantidade Produzida</label>
+            <input type="number" name="quantidade" min="1" required>
+
+            <br><br>
+
+            <button type="submit">Cadastrar</button>
+        </form>
+        <p><?php echo escapar($mensagem)?></p>
+
+        <h2>Máquinas Cadastradas</h2>
+
+        <table border="1">
+            <tr>
+                <th>Nome</th>
+                <th>Tipo</th>
+                <th>Produção</th>
+                <th>Operação</th>
+            </tr>
+
+            <?php foreach ($_SESSION["maquinas"] as $maquina) {?>
+                <tr>
+                    <td><?php echo escapar($maquina->nome);?></td>
+                    <td><?php echo escapar(get_class($maquina));?></td>
+                    <td><?php echo escapar($maquina->getProducao());?></td>
+                    <td><?php echo escapar($maquina->operar());?></td>
+                </tr>
+
+            <?php }?>
+        </table>
+    </div>
 </body>
 </html>
 
