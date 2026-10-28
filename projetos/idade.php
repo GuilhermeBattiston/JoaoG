@@ -20,11 +20,19 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>JoaoG</title>
-    <link rel="stylesheet" href="style.css">
+    <title>Verificação de Idade | Portfólio</title>
+    <link rel="stylesheet" href="../css/projetos.css">
 </head>
 
-<body>
+<body class="pagina-projeto">
+    <header>
+        <nav class="navbar" aria-label="Navegação principal">
+            <a href="../index.php" class="logo">Meu Portfólio</a>
+            <a href="../index.php#projetos">Voltar aos projetos &rarr;</a>
+        </nav>
+    </header>
+    <main>
+        <h1>Verificação de Idade</h1>
 
     <form method="POST">
         <input type="text" name="nome" placeholder="Digite seu nome">
@@ -32,7 +40,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         <input type="number" name="idade" placeholder="Digite sua idade">
 
         <button type="submit">Enviar</button>
-        <a href="../index.php">Voltar ao início</a><br><br>
+
     </form>
 
     <?php if ($resultado != "") { ?>
@@ -45,5 +53,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     <?php } ?>
 
+    </main>
 </body>
 </html>

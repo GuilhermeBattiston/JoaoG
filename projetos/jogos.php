@@ -89,11 +89,19 @@ if (isset($_SESSION["logado"])) {
 <head>
     <meta charset="UTF-8">
     <title>Jogos</title>
-    
-</body>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../css/projetos.css">
+
 </head>
 
-<body>
+<body class="pagina-projeto">
+    <header>
+        <nav class="navbar" aria-label="Navegação principal">
+            <a href="../index.php" class="logo">Meu Portfólio</a>
+            <a href="../index.php#projetos">Voltar aos projetos &rarr;</a>
+        </nav>
+    </header>
+    <main>
 
 <?php if (!isset($_SESSION["logado"])) { ?>
 
@@ -104,18 +112,12 @@ if (isset($_SESSION["logado"])) {
         Usuário:
         <input type="text" name="usuario">
 
-        <br><br>
-
         Senha:
         <input type="password" name="senha">
-
-        <br><br>
 
         <button type="submit" name="login">
             Entrar
         </button>
-
-        <a href="../index.php"></a>
 
     </form>
 
@@ -129,22 +131,14 @@ if (isset($_SESSION["logado"])) {
 
     <form method="POST">
 
-        <a href="../index.php"></a>
-
         Nome do jogo:
         <input type="text" name="nome">
-
-        <br><br>
 
         Gênero:
         <input type="text" name="genero">
 
-        <br><br>
-
         Nota:
         <input type="number" name="nota">
-
-        <br><br>
 
         <button type="submit" name="cadastrar">
             Cadastrar
@@ -164,7 +158,7 @@ if (isset($_SESSION["logado"])) {
 
     <h2>Jogos cadastrados</h2>
 
-    <table border="1">
+    <div class="tabela-container"><table>
 
         <tr>
             <th>ID</th>
@@ -184,8 +178,10 @@ if (isset($_SESSION["logado"])) {
 
         <?php } ?>
 
-    </table>
+    </table></div>
 
 <?php } ?>
-    
+
+    </main>
+</body>
 </html>

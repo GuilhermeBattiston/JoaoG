@@ -1,7 +1,6 @@
 <?php
     require "conexao.php";
     
-    echo "Sistema conectado";
 
     $sql = "CREATE TABLE IF NOT EXISTS teste (
         id INT AUTO_INCREMENT PRIMARY KEY,
@@ -11,28 +10,27 @@
 
     $pdo->exec($sql);
 
-    echo "Tabela criada com sucesso";
 
 ?>
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="/css/index.css">
-    <title>Document</title>
+    <link rel="stylesheet" href="css/index.css">
+    <title>João Guilherme | Portfólio</title>
 </head>
 <body>
     <header>
         <nav class="navbar">
-            <h2 class="logo">Meu Portifólio</h2>
+            <h2 class="logo">Meu Portfólio</h2>
 
             <ul class="menu">
-                <li><a href="#inicio">Verificador de Idade</a><br><br></li>
-                <li><a href="#sobre">Verificador de Notas</a><br><br></li>
-                <li><a href="#habilidades">Desafio-Notas</a><br><br></li>
-                <li><a href="#projetos">Login</a><br><br></li>
-                <li><a href="#contato">Jogos(MySql)</a></li>
+                <li><a href="#inicio">Início</a></li>
+                <li><a href="#sobre">Sobre</a></li>
+                <li><a href="#habilidades">Habilidades</a></li>
+                <li><a href="#projetos">Projetos</a></li>
+                <li><a href="#contato">Contato</a></li>
             </ul>
         </nav>
     </header>
@@ -43,7 +41,7 @@
                 <h1>João Guilherme P. Lopes</h1>
 
                 <p>
-                    Aluno de Análise e Desenvolvimento de Sistemas4
+                    Aluno de Análise e Desenvolvimento de Sistemas
                 </p>
 
                 <a href="#projetos" class="botao">
@@ -61,7 +59,7 @@
                 </p>
 
                 <p> Atualmente estou ainda tendo aulas e não conclui o curso. 
-                    Este portfólio reúne alguns dos projetos dsenvolvidos por mim
+                    Este portfólio reúne alguns dos projetos desenvolvidos por mim
                      durante o curso
                 </p>
                 <p>
@@ -86,13 +84,13 @@
                 <div class="habilidade">
                     PHP
                 </div>
-                <div class="habiliade">
+                <div class="habilidade">
                     PYTHON
                 </div>
-                <div class="habiliade">
+                <div class="habilidade">
                     NODE.JS
                 </div>
-                <div class="habiliade">
+                <div class="habilidade">
                     REACT
                 </div>
             </div>
@@ -118,7 +116,7 @@
                         <span>CSS</span>
                         <span>PHP</span>
                     </div>
-                    <a href="projetos/idades.php" class="link-projeto">
+                    <a href="projetos/idade.php" class="link-projeto">
                         Ver projeto ->
                     </a>
                 </div>
@@ -161,7 +159,7 @@
                         <span>CSS</span>
                         <span>PHP</span>
                     </div>
-                    <a href="projetos/idades.php" class="link-projeto">
+                    <a href="projetos/notas.php" class="link-projeto">
                         Ver projeto ->
                     </a>
                 </div>
@@ -185,6 +183,18 @@
                         Ver projeto ->
                     </a>
                 </div>
+            </div>
+            <div class="projetos-container">
+            <div class="projeto-numero">05</div>
+            <h3 id="titulo-poo2">Controle de Máquinas</h3>
+            <p>Cadastro de máquinas e registro de produção para praticar programação orientada a objetos.</p>
+            <div class="tecnologias">
+                <span>HTML</span>
+                <span>CSS</span>
+                <span>PHP</span>
+                <span>POO</span>
+            </div>
+            <a href="projetos/poo2.php" class="link-projeto">Ver projeto &rarr;</a>
             </div>
         </section>
         <section id="contato" class="secao">

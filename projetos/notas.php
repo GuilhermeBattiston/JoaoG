@@ -5,7 +5,6 @@ $media = "";
 $necessario = "";
 $resultado = "";
 
-
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $nome = $_POST["nome"];
     $idade = $_POST["idade"];
@@ -14,13 +13,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $nota3 = $_POST["nota3"];
     $nota4 = $_POST["nota4"];
     $nota5 = $_POST["nota5"];
-   
+
     $notas = [$nota1, $nota2, $nota3, $nota4, $nota5];
-    
 
     $validar=true;
     $validaridade=true;
-    
+
     foreach ($notas as $nota){
         if($nota<0 || $nota>10){
             $validar=false;
@@ -31,11 +29,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $validar=false;
     }
 
-
     if ($validar){
             $media = (($nota1*2) + ($nota2*3) + ($nota3*1) + ($nota4*1) + ($nota5*3))/10;
-        
-        
+
         $necessario = (7-$media);
         if($media ==10){
              $resultado = "Parabéns!! Aprovado com excelência";
@@ -43,7 +39,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
         elseif ($media >= 7 && $media < 10) {
             $resultado = "Você está aprovado";
-        } 
+        }
         elseif ($media >=5 && $media <7) {
             $resultado = "Você está de recuperação";
         }
@@ -62,23 +58,31 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>JoaoG</title>
-    <link rel="stylesheet" href="style.css">
+    <title>Verificação de Notas | Portfólio</title>
+    <link rel="stylesheet" href="../css/projetos.css">
 </head>
 
-<body>
+<body class="pagina-projeto">
+    <header>
+        <nav class="navbar" aria-label="Navegação principal">
+            <a href="../index.php" class="logo">Meu Portfólio</a>
+            <a href="../index.php#projetos">Voltar aos projetos &rarr;</a>
+        </nav>
+    </header>
+    <main>
+        <h1>Verificação de Notas</h1>
     <div class="card1">
         <form method="POST">
-            <input type="text" name="nome" placeholder="Digite seu nome"><br><br>
-            <input type="number" name="idade" placeholder="Digite sua idade"><br><br>
-            <input type="number" name="nota1" placeholder="Digite a primeira nota"><br><br>
-            <input type="number" name="nota2" placeholder="Digite a segunda nota"><br><br>
-            <input type="number" name="nota3" placeholder="Digite a terceira nota"><br><br>
-            <input type="number" name="nota4" placeholder="Digite a quarta nota"><br><br>
-            <input type="number" name="nota5" placeholder="Digite a quinta nota"><br><br>
+            <input type="text" name="nome" placeholder="Digite seu nome">
+            <input type="number" name="idade" placeholder="Digite sua idade">
+            <input type="number" name="nota1" placeholder="Digite a primeira nota">
+            <input type="number" name="nota2" placeholder="Digite a segunda nota">
+            <input type="number" name="nota3" placeholder="Digite a terceira nota">
+            <input type="number" name="nota4" placeholder="Digite a quarta nota">
+            <input type="number" name="nota5" placeholder="Digite a quinta nota">
 
             <button type="submit">Enviar</button>
-            <a href="../index.php">Voltar ao início</a><br><br>
+
         </form>
     </div>
 
@@ -109,7 +113,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             </div>
         <?php } ?>
     <?php } ?>
-    
 
+    </main>
 </body>
 </html>

@@ -1,4 +1,4 @@
-<?php 
+<?php
 session_start();
 
 abstract class Maquina {
@@ -23,7 +23,6 @@ abstract class Maquina {
         return true;
     }
 
-
     abstract public function operar();
 }
 
@@ -33,13 +32,11 @@ class Esteira extends Maquina{
     }
 }
 
-
 class Prensa extends Maquina{
     public function operar() {
         return "Prensando peças...";
     }
 }
-
 
 class RoboSoldagem extends Maquina{
     public function operar() {
@@ -73,7 +70,6 @@ if($_SERVER["REQUEST_METHOD"]==="POST"){
             $maquina = new RoboSoldagem($nome);
         }
 
-
         $maquina->registrarProducao($quantidade);
 
         $_SESSION["maquinas"][] = $maquina;
@@ -91,16 +87,23 @@ function escapar($texto){
 ?>
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Controle de Máquinas</title>
-    <link rel="stylesheet" href="/css/poo2.css">
+    <link rel="stylesheet" href="../css/projetos.css">
 </head>
-<body>
+<body class="pagina-projeto">
+    <header>
+        <nav class="navbar" aria-label="Navegação principal">
+            <a href="../index.php" class="logo">Meu Portfólio</a>
+            <a href="../index.php#projetos">Voltar aos projetos &rarr;</a>
+        </nav>
+    </header>
+    <main>
     <div class="container">
-        
+
         <h1>Controle de Máquinas Industriais</h1>
         <h2>Cadastrar Máquina</h2>
 
@@ -109,8 +112,6 @@ function escapar($texto){
             <label for="nome">Nome da Máquina</label>
             <input type="text" id="nome" name="nome" required>
 
-            <br><br>
-
             <label>Tipo de Máquina</label>
             <select name="tipo" required>
                 <option value="esteira">Esteira</option>
@@ -118,12 +119,8 @@ function escapar($texto){
                 <option value="roboSolda">Robo Soldagem</option>
             </select>
 
-            <br><br>
-
             <label>Quantidade Produzida</label>
             <input type="number" name="quantidade" min="1" required>
-
-            <br><br>
 
             <button type="submit">Cadastrar</button>
         </form>
@@ -131,7 +128,7 @@ function escapar($texto){
 
         <h2>Máquinas Cadastradas</h2>
 
-        <table border="1">
+        <div class="tabela-container"><table>
             <tr>
                 <th>Nome</th>
                 <th>Tipo</th>
@@ -148,8 +145,9 @@ function escapar($texto){
                 </tr>
 
             <?php }?>
-        </table>
+        </table></div>
     </div>
+    </main>
 </body>
 </html>
 
