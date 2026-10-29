@@ -1,13 +1,16 @@
 <?php
+// Importa o arquivo que cria a conexão PDO com o banco.
     require "conexao.php";
     
 
+// O SQL abaixo cria a tabela teste somente se ela ainda não existir.
     $sql = "CREATE TABLE IF NOT EXISTS teste (
         id INT AUTO_INCREMENT PRIMARY KEY,
         nome VARCHAR(100),
         idade INT
     )";
 
+// Executa o comando SQL no banco conectado.
     $pdo->exec($sql);
 
 
@@ -21,6 +24,7 @@
     <title>João Guilherme | Portfólio</title>
 </head>
 <body>
+<!-- Cabeçalho com menu de links internos para as seções da página. -->
     <header>
         <nav class="navbar">
             <h2 class="logo">Meu Portfólio</h2>
@@ -34,6 +38,7 @@
             </ul>
         </nav>
     </header>
+<!-- Conteúdo principal do portfólio, separado em seções. -->
     <main>
         <section id="inicio" class="inicio">
             <div class="inicio-conteudo">
@@ -95,6 +100,7 @@
                 </div>
             </div>
         </section>
+<!-- Cada cartão de projeto aponta para um exercício PHP. -->
         <section id="projetos" class="secao">
             <h2 class="titulo-secao">Meus Projetos</h2>
             <p class="subtitulo-secao">
