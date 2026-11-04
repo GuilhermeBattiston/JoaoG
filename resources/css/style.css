@@ -1,0 +1,21 @@
+﻿* { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body { min-height: 100vh; font-family: Arial, sans-serif; background-color: #e9e7e2; color: #222222; line-height: 1.6; }
+nav, header { background-color: #46515b; }
+nav { padding: 15px max(20px, calc((100% - 1100px) / 2)); }
+nav a { margin-right: 18px; color: #dddddd; font-weight: bold; text-decoration: none; }
+nav a:hover { color: #a7b6c4; }
+h1 { max-width: 850px; margin: 32px auto 0; padding: 0 20px; color: #343b43; text-align: center; }
+form { width: min(850px, calc(100% - 40px)); margin: 30px auto; padding: 30px; background: #ffffff; border-radius: 10px; box-shadow: 0 3px 12px rgba(0,0,0,.10); }
+label { display: block; margin: 0 0 5px; color: #343b43; font-weight: bold; }
+input, select, textarea { width: 100%; min-height: 44px; margin: 0 0 14px; padding: 10px 12px; border: 1px solid #cbd1d6; border-radius: 5px; background: #ffffff; color: #222222; font: inherit; }
+input:focus, select:focus, textarea:focus { border-color: #596f82; outline: 3px solid rgba(89,111,130,.18); }
+button { display: inline-block; min-height: 44px; padding: 10px 20px; border: 0; border-radius: 6px; background: #596f82; color: #f2f4f5; font: inherit; font-weight: bold; cursor: pointer; transition: background-color .2s ease, transform .2s ease; }
+button:hover { background: #465b6d; transform: translateY(-1px); }
+.container { width: min(850px, calc(100% - 40px)); margin: 30px auto; padding: 25px; background: #ffffff; border-radius: 10px; box-shadow: 0 3px 12px rgba(0,0,0,.10); }
+.container h2 { margin: 0 0 8px; color: #343b43; font-size: 18px; }
+.situacao { padding: 10px; border-radius: 6px; text-align: center; }
+.aprovado { background: #dce6dc; color: #405744; }
+.recuperacao { background: #eee6d3; color: #6d5d3b; }
+.reprovado { background: #eadbdd; color: #704c50; }
+@media (max-width: 600px) { form { padding: 22px; } }
