@@ -1,23 +1,27 @@
-<?php
+<?php 
 
+// Dados para conexão mysql
 $host = "localhost";
-$banco = "luiz315"; //luiz315
-$usuario = "luiz315"; //luiz315
-$senha = "315!@#"; //315!@#
+$banco = "felipeg315";
+$usuario = "felipeg315";
+$senha = "315!@#";
 
-/* PDO = PHP Data Objects, é uma extensão do PHP que fornece uma inteface para acessar 
-bancos de dados e extensões de bancos de dados. Ela permite que você se conecte a diferentes 
-tipos de bancos de dados usando uma sintaxe consistente, tornando o código mais portátil e 
-fácil de manter. */
+// PDO = PHP Data Objects =  ferramenta do PHP para conversar com banco de dados.
+try {
+    $pdo = new PDO("mysql:host=$host;dbname=$banco;charset=utf8mb4", $usuario,$senha);
 
-try{
-    $pdo = new PDO ("mysql:host=$host;dbname=$banco; charset=utf8mb4", $usuario, $senha);
-
-    $pdo ->setAttribute(
-        PDO::ATTR_ERRMODE, 
+    // -> Serve para puxar algo que pertence aquele objeto
+    // PDO:: ATTR_ERRMODE - é para configurar o modo de erros do PDO
+    // PDO:: ERRMODE_EXCEPTION - é para quando acontecer algum erro, transformar em execução
+    $pdo->setAttribute(
+        PDO::ATTR_ERRMODE,
         PDO::ERRMODE_EXCEPTION
     );
 
-} catch (PDOException $erro) {
+    echo "Conectado com sucesso!";
+
+} catch (PDOException $erro){
+    
     echo "Erro ao conectar:".$erro->getMessage();
+
 }

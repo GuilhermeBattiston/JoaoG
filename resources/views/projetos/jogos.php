@@ -1,41 +1,45 @@
-﻿<?php
+<?php
 
-require __DIR__ . "/../../../config/conexao.php";
+    require_once __DIR__ . "/../../../config/conexao.php";
 
-session_start();
-if (empty($_SESSION["autenticado"])) {
-    header("Location: login.php");
-    exit;
-}
+    $mensagem = "";
 
-$pdo->exec("CREATE TABLE IF NOT EXISTS jogos (
-    id INT PRIMARY KEY AUTO_INCREMENT,
-    nome VARCHAR(100),
-    genero VARCHAR(50),
-    nota INT,
-    ano_lancamento INT
-)");
+    $sql = "CREATE TABLE IF NOT EXISTS jogos (
+        id INT PRIMARY KEY AUTO_INCREMENT,
+        nome VARCHAR(100),
+        genero VARCHAR(50),
+        nota INT,
+        ano_lancamento INT
+    )";
 
-$mensagem = "";
-
-if ($_SERVER["REQUEST_METHOD"] === "POST") {
-    $nome = $_POST["nome"];
-    $genero = $_POST["genero"];
-    $nota = $_POST["nota"];
-    $ano_lancamento = $_POST["ano_lancamento"];
-
-    $sql = "INSERT INTO jogos (nome, genero, nota, ano_lancamento)
-            VALUES ('$nome', '$genero', $nota, $ano_lancamento)";
     $pdo->exec($sql);
 
-    $mensagem = "Jogo cadastrado com sucesso!";
-}
+    if ($_SERVER["REQUEST_METHOD"]=="POST") {
+        $usuario = $_POST["usuario"];
+        $senha = $_POST["senha"];
+        $nome = $_POST["nome"];
+        $genero = $_POST["genero"];
+        $nota = $_POST["nota"];
+        $ano_lancamento = $_POST["ano_lancamento"];
 
-// Buscar jogos cadastrados no banco de dados   
+        if ($usuario == "alunosenai" && $senha == "senhasenai"){
+
+            $sql_inserir = "INSERT INTO jogos (nome,genero,nota,ano_lancamento) VALUES ('$nome','$genero','$nota','$ano_lancamento')";
+
+            $pdo->exec($sql_inserir);
+
+            $mensagem = "Jogo cadastrado!";
+        }
+        else {
+            $mensagem = "Erro! Usuário ou senha incorretos. Não foi possível cadastrar o jogo";
+        }
+
+    }
+
 $buscar = "SELECT * FROM jogos";
 
-// exec() = executa algo quando vocÃª NÃƒO espera retorno de dados
-// query() = executa algo quando vocÃª QUER retorno de dados
+// exec() = executa algo quando você NÃO precisa receber registros de volta.
+// query() = executa uam consulta quando você QUER receber dados de volta.
 $stmt = $pdo->query($buscar);
 
 $jogos = $stmt->fetchAll(PDO::FETCH_ASSOC);
@@ -46,60 +50,51 @@ $jogos = $stmt->fetchAll(PDO::FETCH_ASSOC);
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/resources/css/jogos.css">
     <title>Cadastro de jogos</title>
-    <link rel="stylesheet" href="/resources/css/jogos.css?v=20261027">
 </head>
 <body>
-    <nav>
-    <a href="/index.php">PÃ¡gina inicial</a>
-    </nav>
-    <h1>Cadastrar jogo</h1>
-
+<div class="container">
     <form method="POST">
-        <label for="nome">Nome do jogo</label>
-        <input type="text" id="nome" name="nome" maxlength="100" required>
-
-        <label for="genero">GÃªnero</label>
-        <input type="text" id="genero" name="genero" maxlength="50" required>
-
-        <label for="nota">Nota</label>
-        <input type="number" id="nota" name="nota" step="1" required>
-
-        <label for="ano_lancamento">Ano de lanÃ§amento</label>
-        <input type="number" id="ano_lancamento" name="ano_lancamento" step="1" required>
-
-        <button type="submit">Cadastrar</button>
+        <input type="text" id="usuario" name="usuario" placeholder="Digite o usuário"> <br><br>    
+        <input type="text" id="senha" name="senha" placeholder="Digite a senha"> <br><br>
+        <input type="text" id="nome" name="nome" placeholder="Digite o nome do jogo"> <br><br>
+        <input type="text" id="genero" name="genero" placeholder="Digite o gênero do jogo"> <br><br>
+        <input type="number" id="nota" name="nota" placeholder="Digite a nota do jogo"> <br><br>
+        <input type="number" id="ano_lancamento" name="ano_lancamento" placeholder="Digite o ano do lançamento">
+        <button type="submit">Enviar</button>
+            
+        <a href="../../../index.php" class="bt-voltar">Voltar ao início</a>
     </form>
 
-    <?php
-    if ($mensagem != "") {
-        echo "<p>" . $mensagem . "</p>";
-    }
-    ?>
+    <?php if ($mensagem != "") { ?>
+        <p>
+            <?= $mensagem ?>
+        </p>
+    <?php } ?>
 
-    <div class = "tabela_jogos">
-        <h2>Jogos cadastrados</h2>
-        <table>
+    <h2>JOGOS CADASTRADOS</h2>
+    <table>
+        <tr>
+            <th>ID</th>
+            <th>Nome</th>
+            <th>Gênero</th>
+            <th>Nota</th>
+            <th>Ano de Lançamento</th>
+        </tr>
+
+        <!-- foreach() -> Para cada item nessa lista, faça alguma coisa com x variável -->
+        <?php foreach($jogos as $jogo) { ?>
             <tr>
-                <th>ID</th>
-                <th>Nome</th>
-                <th>Gênero</th>
-                <th>Ano de lançamento</th>
-                <th>Nota</th>
+                <td><?= $jogo["id"] ?></td>
+                <td><?= $jogo["nome"] ?></td>
+                <td><?= $jogo["genero"] ?></td>
+                <td><?= $jogo["nota"] ?></td>
+                <td><?= $jogo["ano_lancamento"] ?></td>
             </tr>
-            
-            <!-- foreach() -> Para cada item na lista , faÃ§a algo com X variavel -->
-            <?php foreach($jogos as $jogo) { ?>
-                <tr>
-                    <td><?= $jogo["id"] ?></td>
-                    <td><?= $jogo["nome"] ?></td>
-                    <td><?= $jogo["genero"] ?></td>
-                    <td><?= $jogo["ano_lancamento"] ?></td>
-                    <td><?= $jogo["nota"] ?></td>
-                </tr>
-            <?php } ?>
-        </table>
-    </div>
+        <?php } ?>
+
+    </table>
+</div>
 </body>
 </html>
-
