@@ -2,65 +2,44 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Controllers\Controller;
 use App\Models\Chamado;
- 
+use Illuminate\Contracts\View\View;
+use Illuminate\Http\RedirectResponse;
+use Illuminate\Http\Request;
+use Illuminate\Validation\Rule;
+
 class HelpdeskController extends Controller
 {
-    // GET - Exibir a página do Helpdesk
-    public function index()
+    public function index(Chamado $model): View
     {
-        $model = new Chamado();
- 
-        $chamados = $model->lerChamados();
-        $relatorio = $model->gerarRelatorio();
- 
-        $mensagem = "";
- 
-        return view('projetos.helpdesk', compact('chamados','relatorio','mensagem'));
-        
+        return view('projetos.helpdesk', [
+            'chamados' => $model->lerChamados(),
+            'relatorio' => $model->gerarRelatorio(),
+            'mensagem' => session('mensagem', ''),
+        ]);
     }
- 
-    // POST - Receber os formulários do Helpdesk
-    public function salvar()
+
+    public function salvar(Request $request, Chamado $model): RedirectResponse
     {
-        $model = new Chamado();
- 
-        $acao = $_POST["acao"] ?? "";
-        $sucesso = false;
- 
-        if ($acao === "cadastrar") {
-            $sucesso = $model->cadastrarChamados(
-                $_POST["nome"] ?? "",
-                $_POST["setor"] ?? "",
-                $_POST["equipamento"] ?? "",
-                $_POST["descricao"] ?? "",
-                $_POST["prioridade"] ?? ""
-            );
-        }
- 
-        elseif ($acao === "atualizar") {
-            $sucesso = $model->atualizarChamado(
-                (int) ($_POST["posicao"] ?? -1),
-                $_POST["status"] ?? ""
-            );
-        }
- 
-        elseif ($acao === "excluir") {
-            $sucesso = $model->excluirChamado(
-                (int) ($_POST["posicao"] ?? -1)
-            );
-        }
- 
-        // Mensagem de retorno para o usuário
-        $mensagem = $sucesso
-            ? "Operação realizada com sucesso!"
-            : "Não foi possível realizar a operação.";
- 
-        // Atualizar os dados após a operação
-        $chamados = $model->lerChamados();
-        $relatorio = $model->gerarRelatorio();
- 
-        return view('projetos.helpdesk', compact('chamados','relatorio','mensagem'));
+        $dados = $request->validate([
+            'acao' => ['required', Rule::in(['cadastrar', 'atualizar', 'excluir'])],
+            'nome' => ['required_if:acao,cadastrar', 'string', 'max:100'],
+            'setor' => ['required_if:acao,cadastrar', Rule::in(['producao', 'administrativo', 'logistica', 'financeiro', 'ti'])],
+            'equipamento' => ['required_if:acao,cadastrar', Rule::in(['computador', 'impressora', 'rede', 'sistema', 'outro'])],
+            'descricao' => ['required_if:acao,cadastrar', 'string', 'max:5000'],
+            'prioridade' => ['required_if:acao,cadastrar', Rule::in(['baixa', 'media', 'alta'])],
+            'posicao' => ['required_unless:acao,cadastrar', 'integer', 'min:0'],
+            'status' => ['required_if:acao,atualizar', Rule::in(['Aberto', 'Em andamento', 'Resolvido'])],
+        ]);
+
+        $sucesso = match ($dados['acao']) {
+            'cadastrar' => $model->cadastrarChamados($dados['nome'], $dados['setor'], $dados['equipamento'], $dados['descricao'], $dados['prioridade']),
+            'atualizar' => $model->atualizarChamado((int) $dados['posicao'], $dados['status']),
+            'excluir' => $model->excluirChamado((int) $dados['posicao']),
+        };
+
+        return to_route('helpdesk')->with('mensagem', $sucesso
+            ? 'Operação realizada com sucesso!'
+            : 'Não foi possível realizar a operação.');
     }
 }

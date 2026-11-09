@@ -2,113 +2,118 @@
 
 namespace App\Models;
 
-class Chamado {
+use Closure;
+use RuntimeException;
 
+class Chamado
+{
     private string $arquivo;
 
-    public function __construct() {
-        $arquivo = storage_path('app/chamados.json');
+    public function __construct()
+    {
+        $this->arquivo = storage_path('app/chamados.json');
     }
 
-    private function garantirDiretorio(): void {
+    private function acessarArquivo(int $modo, Closure $operacao): mixed
+    {
         $diretorio = dirname($this->arquivo);
-        if (!is_dir($diretorio)) {
-            mkdir($diretorio, 0777, true);
+        if (! is_dir($diretorio) && ! mkdir($diretorio, 0755, true) && ! is_dir($diretorio)) {
+            throw new RuntimeException('Não foi possível criar o diretório de chamados.');
+        }
+        $arquivo = fopen($this->arquivo, 'c+');
+        if ($arquivo === false) {
+            throw new RuntimeException('Não foi possível abrir o arquivo de chamados.');
+        }
+        try {
+            if (! flock($arquivo, $modo)) {
+                throw new RuntimeException('Não foi possível bloquear o arquivo de chamados.');
+            }
+            $conteudo = stream_get_contents($arquivo);
+            $chamados = $conteudo === '' ? [] : json_decode($conteudo, true, 512, JSON_THROW_ON_ERROR);
+            if (! is_array($chamados) || ! array_is_list($chamados) || count(array_filter($chamados, 'is_array')) !== count($chamados)) {
+                throw new RuntimeException('O arquivo de chamados não contém uma lista válida.');
+            }
+            $resultado = $operacao($chamados);
+            if ($modo === LOCK_EX && $resultado === true) {
+                $json = json_encode($chamados, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE | JSON_THROW_ON_ERROR);
+                rewind($arquivo);
+                if (! ftruncate($arquivo, 0) || fwrite($arquivo, $json) !== strlen($json) || ! fflush($arquivo)) {
+                    throw new RuntimeException('Não foi possível salvar os chamados.');
+                }
+            }
+
+            return $resultado;
+        } finally {
+            flock($arquivo, LOCK_UN);
+            fclose($arquivo);
         }
     }
 
-    public function lerChamados(): array {
-        $this->garantirDiretorio();
-
-        if (!file_exists($this->arquivo)) {
-            file_put_contents($this->arquivo, "[]");
-        }
-
-        $conteudo = file_get_contents($this->arquivo);
-        $chamados = json_decode($conteudo, true);
-
-        return is_array($chamados) ? $chamados : [];
+    public function lerChamados(): array
+    {
+        return $this->acessarArquivo(LOCK_SH, fn (array $chamados): array => $chamados);
     }
 
-    public function salvarChamados(array $chamados): bool {
-        $this->garantirDiretorio();
+    public function salvarChamados(array $chamados): bool
+    {
+        return $this->acessarArquivo(LOCK_EX, function (array &$atuais) use ($chamados): bool {
+            $atuais = array_values($chamados);
 
-        return file_put_contents(
-            $this->arquivo,
-            json_encode($chamados, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE)
-        ) !== false;
+            return true;
+        });
     }
 
-    public function cadastrarChamados(string $nome, string $setor, string $equipamento, string $descricao, string $prioridade): bool {
-        if (trim($nome) === "" || trim($descricao) === "") {
+    public function cadastrarChamados(string $nome, string $setor, string $equipamento, string $descricao, string $prioridade): bool
+    {
+        if (trim($nome) === '' || trim($descricao) === '') {
             return false;
         }
 
-        $chamados = $this->lerChamados();
+        return $this->acessarArquivo(LOCK_EX, function (array &$chamados) use ($nome, $setor, $equipamento, $descricao, $prioridade): bool {
+            $chamados[] = ['nome' => trim($nome), 'setor' => $setor, 'equipamento' => $equipamento, 'descricao' => trim($descricao), 'prioridade' => $prioridade, 'status' => 'Aberto'];
 
-        $novoChamado = [
-            "nome" => trim($nome),
-            "setor" => $setor,
-            "equipamento" => $equipamento,
-            "descricao" => trim($descricao),
-            "prioridade" => $prioridade,
-            "status" => "Aberto"
-        ];
-
-        $chamados[] = $novoChamado;
-
-        return $this->salvarChamados($chamados);
+            return true;
+        });
     }
 
-    public function atualizarChamado(int $posicao, string $novoStatus): bool {
-        $chamados = $this->lerChamados();
-        
-        $statusPermitidos = ["Aberto", "Em andamento", "Resolvido"];
-
-        if (!isset($chamados[$posicao])) {
+    public function atualizarChamado(int $posicao, string $novoStatus): bool
+    {
+        if (! in_array($novoStatus, ['Aberto', 'Em andamento', 'Resolvido'], true)) {
             return false;
         }
 
-        if (!in_array($novoStatus, $statusPermitidos, true)) {
-            return false;
-        }
+        return $this->acessarArquivo(LOCK_EX, function (array &$chamados) use ($posicao, $novoStatus): bool {
+            if (! isset($chamados[$posicao])) {
+                return false;
+            }
+            $chamados[$posicao]['status'] = $novoStatus;
 
-        $chamados[$posicao]["status"] = $novoStatus;
-
-        return $this->salvarChamados($chamados);
+            return true;
+        });
     }
 
-    public function excluirChamado(int $posicao): bool {
-        $chamados = $this->lerChamados();
+    public function excluirChamado(int $posicao): bool
+    {
+        return $this->acessarArquivo(LOCK_EX, function (array &$chamados) use ($posicao): bool {
+            if (! isset($chamados[$posicao])) {
+                return false;
+            }
+            unset($chamados[$posicao]);
+            $chamados = array_values($chamados);
 
-        if (!isset($chamados[$posicao])) {
-            return false;
-        }
-
-        unset($chamados[$posicao]);
-        $chamados = array_values($chamados);
-
-        return $this->salvarChamados($chamados);
+            return true;
+        });
     }
 
-    public function gerarRelatorio(): array {
+    public function gerarRelatorio(): array
+    {
         $chamados = $this->lerChamados();
-
-        $relatorio = [
-            "total" => count($chamados),
-            "abertos" => 0,
-            "andamento" => 0,
-            "resolvidos" => 0
-        ];
-
+        $relatorio = ['total' => count($chamados), 'abertos' => 0, 'andamento' => 0, 'resolvidos' => 0];
+        $categorias = ['Aberto' => 'abertos', 'Em andamento' => 'andamento', 'Resolvido' => 'resolvidos'];
         foreach ($chamados as $chamado) {
-            $status = $chamado["status"] ?? '';
-            if ($status === "Aberto") {
-                $relatorio["abertos"]++;
-            } elseif ($status === "Em andamento") {
-                $relatorio["andamento"]++;
-            } elseif ($status === "Resolvido") {
-                $relatorio["resolvidos"]++;
+            $categoria = $categorias[$chamado['status'] ?? ''] ?? null;
+            if ($categoria !== null) {
+                $relatorio[$categoria]++;
             }
         }
 

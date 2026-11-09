@@ -94,7 +94,7 @@ header {
 
     text-decoration: none;
 
-    border-radius: none;
+    border-radius: 0;
 
     font-weight: bold;
 }
@@ -191,7 +191,7 @@ header {
 
 /* PROJETOS */
 
-.projetos-conatainer {
+.projetos-container {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     gap: 25px;
@@ -229,14 +229,14 @@ header {
 
 /* TECNOLOGIAS USADAS */
 
-.tecnologias {
+.tecnologia {
     display: flex;
     flex-wrap: wrap;
     gap: 8px;
     margin-bottom: 20px;
 }
 
-.tecnologias span {
+.tecnologia span {
     background-color: #e4e8eb;
     color: #435667;
     padding: 5px 10px;
@@ -271,7 +271,7 @@ header {
     width: 280px;
     padding: 25px;
     text-align: center;
-    border-radius: 18x;
+    border-radius: 18px;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.10);
 }
 
@@ -296,3 +296,26 @@ footer {
 /* CONTROLE DE QUALIDADE */
 /*github.com/lookdev-luz/315_DS*/
 /*valane.vip*/
+
+.menu { display: flex; flex-wrap: wrap; gap: 16px; list-style: none; }
+.projetos-container { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+.sobre-texto, .projeto-card { min-width: 0; overflow-wrap: anywhere; }
+a:focus-visible { outline: 3px solid currentColor; outline-offset: 4px; }
+@media (max-width: 800px) {
+    .navbar { flex-direction: column; gap: 16px; }
+    .menu { justify-content: center; }
+    .sobre-conteudo { flex-direction: column; gap: 24px; }
+    .projetos-container { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .inicio h1 { font-size: clamp(32px, 8vw, 60px); }
+}
+@media (max-width: 520px) {
+    .projetos-container { grid-template-columns: 1fr; }
+    .secao { padding: 48px 20px; }
+    .inicio h2 { font-size: 24px; }
+    .inicio { padding: 40px 0; }
+    .contato-item { max-width: 100%; overflow-wrap: anywhere; }
+}
+@media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+    *, *::before, *::after { transition: none !important; transform: none !important; }
+}

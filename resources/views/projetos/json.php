@@ -1,25 +1,25 @@
 <?php
 
-    // 1. DECLARAR O CAMINHO DO ARQUIVO JSON
-    $caminho = __DIR__. "/dados.json";
+// 1. DECLARAR O CAMINHO DO ARQUIVO JSON
+$caminho = __DIR__.'/dados.json';
 
-    // 2. ABRIR/LER O ARQUIVO JSON
-    $json = file_get_contents($caminho);
+// 2. ABRIR/LER O ARQUIVO JSON
+$json = is_file($caminho) ? file_get_contents($caminho) : '[]';
 
-    // 3. TRANSFORMAR JSON EM ARRAY PHP
-    $alunos = json_decode($json, true);
+// 3. TRANSFORMAR JSON EM ARRAY PHP
+$alunos = json_decode($json, true, 512, JSON_THROW_ON_ERROR);
 
-    if ($_SERVER["REQUEST_METHOD"] === "POST"){
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
-        $acao = $_POST["acao"];
-        
-        if($acao === "cadastrar"){
+    $acao = ($_POST['acao'] ?? '');
+
+    if ($acao === 'cadastrar') {
 
         // 4. CRIAR UM ALUNO
         $novoAluno = [
-            "nome" => $_POST["nome"],
-            "idade" => $_POST["idade"],
-            "curso" => $_POST["curso"]
+            'nome' => $_POST['nome'],
+            'idade' => $_POST['idade'],
+            'curso' => $_POST['curso'],
         ];
 
         // 5. ADICIONAR O ALUNO NO ARRAY
@@ -27,29 +27,28 @@
 
         // 6. TRANSFORMAR ARRAY PHP EM JSON
         $jsonAtualizado = json_encode($alunos,
-            JSON_PRETTY_PRINT | 
+            JSON_PRETTY_PRINT |
             JSON_UNESCAPED_UNICODE
         );
 
         // 7. SALVAR NO ARQUIVO
-        file_put_contents($caminho, 
-        $jsonAtualizado);
+        file_put_contents($caminho,
+            $jsonAtualizado);
 
-        
     }
 
-    if($acao === "atualizar"){
+    if ($acao === 'atualizar') {
 
         // PEGAR OS DADOS DO FORMULÁRIO
-        $nome = $_POST["nome"];
-        $novaIdade = $_POST["idade"];
-        $novoCurso = $_POST["curso"];
+        $nome = $_POST['nome'];
+        $novaIdade = $_POST['idade'];
+        $novoCurso = $_POST['curso'];
 
         // PERCORRER TODOS OS ALUNOS
-        foreach($alunos as $posicao => $aluno){
-            if($aluno["nome"] == $nome){
-                $alunos[$posicao]["idade"] = $novaIdade;
-                $alunos[$posicao]["curso"] = $novoCurso;
+        foreach ($alunos as $posicao => $aluno) {
+            if ($aluno['nome'] == $nome) {
+                $alunos[$posicao]['idade'] = $novaIdade;
+                $alunos[$posicao]['curso'] = $novoCurso;
 
             }
         }
@@ -64,15 +63,15 @@
         file_put_contents($caminho, $jsonAtualizado);
     }
 
-    if ($acao === "deletar"){
+    if ($acao === 'deletar') {
 
         // PEGAR O NOME QUE QUEREMOS DELETAR
-        $nome = $_POST["nome"];
+        $nome = $_POST['nome'];
 
         // PERCORRER TODOS OS ALUNOS
-        foreach($alunos as $posicao -> $aluno){
+        foreach ($alunos as $posicao => $aluno) {
 
-            if ($aluno["nome"] === $nome){
+            if ($aluno['nome'] === $nome) {
                 // DELETAR O ALUNO DO ARRAY
                 unset($alunos[$posicao]);
             }
@@ -80,6 +79,7 @@
 
         // REORGANIZAR AS POSIÇÕES DO ARRAY
         $alunos = array_values($alunos);
+        file_put_contents($caminho, json_encode($alunos, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE | JSON_THROW_ON_ERROR), LOCK_EX);
 
     }
 }
@@ -107,10 +107,10 @@
     </form>
 
     <h2>ALUNOS CADASTRADOS</h2>
-    <?php foreach($alunos as $aluno){ ?>
-    <h3><?= $aluno["nome"] ?></h3>
-    <p>Idade: <?= $aluno["idade"] ?></p>
-    <p>Curso: <?= $aluno["curso"] ?></p>
+    <?php foreach ($alunos as $aluno) { ?>
+    <h3><?= htmlspecialchars((string) $aluno['nome'], ENT_QUOTES, 'UTF-8') ?></h3>
+    <p>Idade: <?= htmlspecialchars((string) $aluno['idade'], ENT_QUOTES, 'UTF-8') ?></p>
+    <p>Curso: <?= htmlspecialchars((string) $aluno['curso'], ENT_QUOTES, 'UTF-8') ?></p>
     <?php } ?>
 
     <form method="POST">
