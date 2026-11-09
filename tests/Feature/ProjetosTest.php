@@ -13,7 +13,9 @@ class ProjetosTest extends TestCase
     {
         $this->get('/')->assertOk()->assertSee(route('idade'));
         foreach (['idade', 'notas', 'login-basico', 'jogos', 'poo2'] as $projeto) {
-            $this->get('/projetos/'.$projeto)->assertOk()->assertSee('name="_token"', false);
+            $this->get('/projetos/'.$projeto)->assertOk()->assertSee('name="_token"', false)
+                ->assertDontSee('<<<<<<<', false)
+                ->assertDontSee('>>>>>>>', false);
             $this->get('/resources/views/projetos/'.$projeto.'.php')->assertRedirect('/projetos/'.$projeto);
         }
     }
