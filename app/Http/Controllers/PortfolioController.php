@@ -1,10 +1,13 @@
 <?php
 
-    class PortfolioController{
+namespace App\Http\Controllers;
 
-        public function index(){
-            require_once __DIR__ . "/../../../resources/views/portfolio.php";
-        }
+use Illuminate\Contracts\View\View;
+
+class PortfolioController extends Controller
+{
+    public function index(): View
+    {
+        return view('portfolio');
     }
-
-?>
+}

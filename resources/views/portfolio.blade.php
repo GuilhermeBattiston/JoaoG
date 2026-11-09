@@ -4,8 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    @vite(['/resources/css/index.css'])
-    <link rel="stylesheet" href="/resources/css/index.css">
+    @vite(['resources/css/index.css'])
     <title>Portfólio</title>
 </head>
 <body>
@@ -112,7 +111,7 @@
                             <span>CSS</span>
                             <span>PHP</span>
                         </div>
-                        <a href=" {{ route('helpdesk') }}" class="link-projeto">
+                        <a href="{{ route('idade') }}" class="link-projeto">
                             Ver projeto
                         </a>
 
@@ -132,7 +131,7 @@
                             <span>CSS</span>
                             <span>PHP</span>
                         </div>
-                        <a href="/resources/views/projetos/notas.php" class="link-projeto">
+                        <a href="{{ route('notas') }}" class="link-projeto">
                             Ver projeto
                         </a>
                      </div>
@@ -146,12 +145,13 @@
                         <p>
                             Aplicação em PHP que verifica as credenciais informadas pelo usuário 
                             e exibe mensagens de sucesso ou erro, com interface estilizada em CSS.
+                        </p>
                         <div class="tecnologia">
                             <span>HTML</span>
                             <span>CSS</span>
                             <span>PHP</span>
                         </div>
-                        <a href="/resources/views/projetos/login-basico.php" class="link-projeto">
+                        <a href="{{ route('login-basico') }}" class="link-projeto">
                             Ver projeto
                         </a>
                      </div>
@@ -171,7 +171,7 @@
                             <span>CSS</span>
                             <span>PHP</span>
                         </div>
-                        <a href="/resources/views/projetos/jogos.php" class="link-projeto">
+                        <a href="{{ route('jogos') }}" class="link-projeto">
                             Ver projeto
                         </a>
                      </div>
@@ -192,7 +192,7 @@
                             <span>PHP</span>
                             <span>JSON</span>
                         </div>
-                        <a href="/resources/views/projetos/helpdesk.php" class="link-projeto">
+                        <a href="{{ route('helpdesk') }}" class="link-projeto">
                             Ver projeto
                         </a>
                      </div>
@@ -212,7 +212,7 @@
                             <span>CSS</span>
                             <span>PHP</span>
                         </div>
-                        <a href="/resources/views/projetos/poo2.php" class="link-projeto">
+                        <a href="{{ route('poo2') }}" class="link-projeto">
                             Ver projeto
                         </a>
                      </div>
@@ -240,7 +240,7 @@
 
     <footer>
         <p>
-            Desenvolvido por <a href="felipeg315.devlook.xyz"> Felipe Pantarotti</a> • 2026
+            Desenvolvido por <a href="https://felipeg315.devlook.xyz"> Felipe Pantarotti</a> • 2026
         </p>
     </footer>
 </body>

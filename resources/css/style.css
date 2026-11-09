@@ -19,3 +19,8 @@ button:hover { background: #465b6d; transform: translateY(-1px); }
 .recuperacao { background: #eee6d3; color: #6d5d3b; }
 .reprovado { background: #eadbdd; color: #704c50; }
 @media (max-width: 600px) { form { padding: 22px; } }
+
+.tabela-container { max-width: 100%; overflow-x: auto; }
+table { border-collapse: collapse; margin: 20px auto; }
+th, td { padding: 12px; text-align: left; border-bottom: 1px solid #cbd1d6; }
+[role="alert"] { margin: 20px; padding: 16px; border: 1px solid #704c50; background: #eadbdd; }

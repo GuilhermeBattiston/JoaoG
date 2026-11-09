@@ -1,22 +1,23 @@
 <?php
 
-    function apresentarSistema(){
-        echo "Bem vindo(a) ao Help Desk!";
-    }
+function apresentarSistema()
+{
+    echo 'Bem vindo(a) ao Help Desk!';
+}
 
-    apresentarSistema();
+apresentarSistema();
 
-    function abrirChamado($nome, $problema){
-        echo "$nome abriu um chamado: $problemas";
-    }
+function abrirChamado($nome, $problema)
+{
+    echo "$nome abriu um chamado: $problema";
+}
 
-    abrirChamado("Felipe", "Impressora não funciona");
+abrirChamado('Felipe', 'Impressora não funciona');
 
-    function contarChamados($quantidade){
-        return "Existem $quantidade chammados registrados";
-    }
+function contarChamados($quantidade)
+{
+    return "Existem $quantidade chammados registrados";
+}
 
-    $resultado = contarChamados(S);
-    // echo $resultado;
-
-?>
+$resultado = contarChamados(5);
+// echo $resultado;
