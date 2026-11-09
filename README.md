@@ -1,3 +1,11 @@
+# JoaoG
+
+Portfólio em Laravel com projetos de idade, notas, login demonstrativo, jogos, produção industrial e Helpdesk.
+
+Para publicar ou investigar a tela padrão do Laravel no DevLook, siga [DEPLOY.md](DEPLOY.md). O lock atual exige PHP **8.4.1+**; o build usa Node **22.12+** (ou 20.19+).
+
+Depois de configurar a instalação, execute `php artisan app:check-deploy --production` para validar rotas, build, ambiente e banco sem revelar credenciais.
+
 <p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
 
 <p align="center">
