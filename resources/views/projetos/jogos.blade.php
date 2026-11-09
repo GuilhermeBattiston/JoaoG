@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <?php
 
     require_once __DIR__ . "/../../../config/conexao.php";
@@ -45,11 +46,15 @@ $stmt = $pdo->query($buscar);
 $jogos = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
 ?>
+=======
+<?php $mensagem = session('mensagem', ''); ?>
+>>>>>>> df0f77ec3d5938d164180aa3a178fd3b71c1ff1c
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<<<<<<< HEAD
     <link rel="stylesheet" href="/resources/css/jogos.css">
     <title>Cadastro de jogos</title>
 </head>
@@ -65,6 +70,31 @@ $jogos = $stmt->fetchAll(PDO::FETCH_ASSOC);
         <button type="submit">Enviar</button>
             
         <a href="../../../index.php" class="bt-voltar">Voltar ao início</a>
+=======
+    @vite(['resources/css/jogos.css'])
+    <title>Cadastro de jogos</title>
+</head>
+<body>
+    @include('projetos.erros')
+<div class="container">
+    <form method="POST">
+            @csrf
+        <label for="usuario">Digite o usuário</label>
+        <input type="text" id="usuario" name="usuario" placeholder="Digite o usuário"> <br><br>    
+        <label for="senha">Digite a senha</label>
+        <input type="password" id="senha" name="senha" placeholder="Digite a senha"> <br><br>
+        <label for="nome">Digite o nome do jogo</label>
+        <input type="text" id="nome" name="nome" placeholder="Digite o nome do jogo"> <br><br>
+        <label for="genero">Digite o gênero do jogo</label>
+        <input type="text" id="genero" name="genero" placeholder="Digite o gênero do jogo"> <br><br>
+        <label for="nota">Digite a nota do jogo</label>
+        <input type="number" id="nota" name="nota" placeholder="Digite a nota do jogo"> <br><br>
+        <label for="ano_lancamento">Digite o ano do lançamento</label>
+        <input type="number" id="ano_lancamento" name="ano_lancamento" placeholder="Digite o ano do lançamento">
+        <button type="submit">Enviar</button>
+            
+        <a href="{{ route('portfolio') }}" class="bt-voltar">Voltar ao início</a>
+>>>>>>> df0f77ec3d5938d164180aa3a178fd3b71c1ff1c
     </form>
 
     <?php if ($mensagem != "") { ?>
@@ -74,7 +104,11 @@ $jogos = $stmt->fetchAll(PDO::FETCH_ASSOC);
     <?php } ?>
 
     <h2>JOGOS CADASTRADOS</h2>
+<<<<<<< HEAD
     <table>
+=======
+    <div class="tabela-container" role="region" aria-label="Registros cadastrados" tabindex="0"><table>
+>>>>>>> df0f77ec3d5938d164180aa3a178fd3b71c1ff1c
         <tr>
             <th>ID</th>
             <th>Nome</th>
@@ -87,14 +121,23 @@ $jogos = $stmt->fetchAll(PDO::FETCH_ASSOC);
         <?php foreach($jogos as $jogo) { ?>
             <tr>
                 <td><?= $jogo["id"] ?></td>
+<<<<<<< HEAD
                 <td><?= $jogo["nome"] ?></td>
                 <td><?= $jogo["genero"] ?></td>
+=======
+                <td>{{ $jogo["nome"] }}</td>
+                <td>{{ $jogo["genero"] }}</td>
+>>>>>>> df0f77ec3d5938d164180aa3a178fd3b71c1ff1c
                 <td><?= $jogo["nota"] ?></td>
                 <td><?= $jogo["ano_lancamento"] ?></td>
             </tr>
         <?php } ?>
 
+<<<<<<< HEAD
     </table>
+=======
+    </table></div>
+>>>>>>> df0f77ec3d5938d164180aa3a178fd3b71c1ff1c
 </div>
 </body>
 </html>
